@@ -1,0 +1,9 @@
+[submodule "amazon-freertos/libraries/coreHTTP"]
+	path = amazon-freertos/libraries/coreHTTP
+	url = git@github.com:FreeRTOS/coreHTTP.git
+[submodule "amazon-freertos/libraries/freertos_plus/FreeRTOS-Plus-TCP"]
+	path = amazon-freertos/libraries/freertos_plus/FreeRTOS-Plus-TCP
+	url = git@github.com:FreeRTOS/FreeRTOS-Plus-TCP.git
+[submodule "amazon-freertos/libraries/3rdparty/wolfssl"]
+	path = amazon-freertos/libraries/3rdparty/wolfssl
+	url = git@github.com:wolfSSL/wolfssl.git

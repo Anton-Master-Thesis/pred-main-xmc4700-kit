@@ -1,0 +1,109 @@
+/*
+ * ah_config.h
+ *
+ *  Created on: 28 Apr 2022
+ *      Author: Johansson
+ */
+
+#ifndef AH_CONFIG_H_
+#define AH_CONFIG_H_
+
+#define AH_HTTPS_ROOT_CA 												\
+"-----BEGIN CERTIFICATE-----\n"											\
+"MIIDMzCCAhugAwIBAgIEXNliGTANBgkqhkiG9w0BAQsFADAXMRUwEwYDVQQDDAxh\n"	\
+"cnJvd2hlYWQuZXUwHhcNMTkwNTEzMTIyNDU3WhcNMjkwNTEzMTIyNDU3WjAoMSYw\n"	\
+"JAYDVQQDDB10ZXN0Y2xvdWQyLmFpdGlhLmFycm93aGVhZC5ldTCCASIwDQYJKoZI\n"	\
+"hvcNAQEBBQADggEPADCCAQoCggEBAJV8P9a3Qjl3jcm0kLwKMqwKux6CHVyojfRO\n"	\
+"Zu0A6NLp0BZjcyzsH66Xj22Fub6gcUnMx7sg3DsYANXyTYZTaRCn/058BaLpD8we\n"	\
+"2Q0+XT2xEKsh8PtMkuj3Ebge93W6E5a/fvl+Xx3Ggi8SCC9OscG3hzN8cpXt7vPg\n"	\
+"AU6k/TgsAAnAnCbVqlrevMSAy6Opq5g2RM795J/mvom9seGmL0xOilXTlGK9gZBB\n"	\
+"HQfcY7sQc0/SJOUwNVQc9xNgRyf85EVgLFq2kkW4Tjyc8JNa6PgjUTF67NJQasXV\n"	\
+"BY+EydvqwZsdeKnaHrjRdIQxQ8uZLZXmnVSPtQhX3cG/+untN88CAwEAAaN2MHQw\n"	\
+"DwYDVR0TBAgwBgEB/wIBAjBCBgNVHSMEOzA5gBSaipkeMUwesuYttprtxx4xyt07\n"	\
+"/qEbpBkwFzEVMBMGA1UEAwwMYXJyb3doZWFkLmV1ggRc1T6tMB0GA1UdDgQWBBQE\n"	\
+"ME0II5M93mY9Flqn0cleI6aXTzANBgkqhkiG9w0BAQsFAAOCAQEAP4kKGckmZk/t\n"	\
+"+OrZ8D1P0hhBbAyNWlDijVexoP8JGxo1blEbftfEJ3FdYL+CKFJ1wa7l+jhvAiW9\n"	\
+"EiIk6Z/DvH5b9NMxyc72kTy4P0yYmXuJ2/x/rA2hdBwFuSx4KYjFOrMaSGwuCXae\n"	\
+"ec61odXhtxC9Y7HGoIao+pNjD1qa82sgzRA6ZQSMyTGI1NaVfBco6VMb1Hu9U6i0\n"	\
+"HdbUtu9O3VmkgAI/U7nF/qDcuBHaHXEco4ApTh+PWo6BLmqaBOdcpgRD0F7vc5y/\n"	\
+"JviipqjU4oHiX7CQShdGUC4lkPZmXFlfsoXACIpcPDF/49BX1OAy4GNCl1PeyU7A\n"	\
+"6STgROIXpw==\n"														\
+"-----END CERTIFICATE-----\n"
+
+#define AH_HTTPS_CLIENT_CA												\
+"-----BEGIN CERTIFICATE-----\n"											\
+"MIIDWDCCAkCgAwIBAgIEXcLHAjANBgkqhkiG9w0BAQsFADAoMSYwJAYDVQQDDB10\n"	\
+"ZXN0Y2xvdWQyLmFpdGlhLmFycm93aGVhZC5ldTAeFw0xOTExMDYxMzEzMzhaFw0y\n"	\
+"OTExMDYxMzEzMzhaMDAxLjAsBgNVBAMMJWNsaWVudDEudGVzdGNsb3VkMi5haXRp\n"	\
+"YS5hcnJvd2hlYWQuZXUwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC+\n"	\
+"/k/TyKKYNjy/iOQyy5UwCO8ugWMDZWaCfS+sRuzShiFOoBBRdzMEgzfTTDJ9lYIJ\n"	\
+"rYm3IvkBl4NIivyS23h9i0yFVhcpyyl+5ENVxw2j6sq2T5/D214tL9KOUrANYgzT\n"	\
+"Q3XFwufwfqccJoJaRvn/50VBQTYZ7fwirtrh5uQ5S1BWG36sSx9zFvIoYZrdfKj/\n"	\
+"NFk3z1DvxhIWp/EYrSXOpbpzmCCLd3WeApnu6c7dkzhplRfnwc/nsXJB5Fumb542\n"	\
+"Rkr0SPx15bwSmMheijksecmGFdqKF7aaG/wbHGm/0J+eyJq7+rUCKpfE+/KTfuGu\n"	\
+"GFh1PK2HqlQA91toGEHfAgMBAAGjgYEwfzAaBgNVHREEEzARgglsb2NhbGhvc3SH\n"	\
+"BH8AAAEwQgYDVR0jBDswOYAUBDBNCCOTPd5mPRZap9HJXiOml0+hG6QZMBcxFTAT\n"	\
+"BgNVBAMMDGFycm93aGVhZC5ldYIEXNliGTAdBgNVHQ4EFgQUSjCmtQwF73HVfZAu\n"	\
+"briC4SIzH3YwDQYJKoZIhvcNAQELBQADggEBABF4x6SAv9d1YGRmDb1l5PRpCvU6\n"	\
+"ej9UKRxB5NioIsKGu/CEivAhQdj1ngMtZaFjwFBGD+mlQ7KupwroOii1EdGD1zKM\n"	\
+"aiXO+0sOYKVplrkDcK1b8+4hfJL8MOt4KR4W249fQr/fC7Et1XtXyo1fogCtlqyD\n"	\
+"yVmZktVRG4RVqkSxfk6+ewJjGIS0Pr6N8w8t0RCK+VIVyMhBWZOcIPO6rNzh2Lym\n"	\
+"tC46vV6dNvD6AfNHGH+H0UI57IjwtiVvPHtzykCUXIqg/ZPjz24i3UqozIFtTgrY\n"	\
+"2nPPmhrecGT7O5hLZdsoCd4bvq67oohupwxHeZ1f83Fp67YeTvIt800TeVc=\n"		\
+"-----END CERTIFICATE-----\n"
+
+#define AH_HTTPS_PUBLIC_KEY												\
+"-----BEGIN PUBLIC KEY-----\n"											\
+"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvv5P08iimDY8v4jkMsuV\n"	\
+"MAjvLoFjA2Vmgn0vrEbs0oYhTqAQUXczBIM300wyfZWCCa2JtyL5AZeDSIr8ktt4\n"	\
+"fYtMhVYXKcspfuRDVccNo+rKtk+fw9teLS/SjlKwDWIM00N1xcLn8H6nHCaCWkb5\n"	\
+"/+dFQUE2Ge38Iq7a4ebkOUtQVht+rEsfcxbyKGGa3Xyo/zRZN89Q78YSFqfxGK0l\n"	\
+"zqW6c5ggi3d1ngKZ7unO3ZM4aZUX58HP57FyQeRbpm+eNkZK9Ej8deW8EpjIXoo5\n"	\
+"LHnJhhXaihe2mhv8Gxxpv9Cfnsiau/q1AiqXxPvyk37hrhhYdTyth6pUAPdbaBhB\n"	\
+"3wIDAQAB\n"															\
+"-----END PUBLIC KEY-----\n"
+
+#define AH_HTTPS_PRIVATE_KEY											\
+"-----BEGIN ENCRYPTED PRIVATE KEY-----\n"								\
+"MIIFHDBOBgkqhkiG9w0BBQ0wQTApBgkqhkiG9w0BBQwwHAQIUz3E0Cm6ut8CAggA\n"	\
+"MAwGCCqGSIb3DQIJBQAwFAYIKoZIhvcNAwcECCIF1R7pyrkTBIIEyCklo7UGFU9X\n"	\
+"UcpMf3NrdxPF1D5+5qrT1JDBs7zAkckhlkSr7hej6WwGOmzbZn7ZicuhW76Ej/ir\n"	\
+"W3mw0oyiSfDPNpo6+GUuqq0Up8fVS8x/dXXOX+ojwy8+DF1ZJo6Am7YnKf/o3aAJ\n"	\
+"7g2UGduO+nmch6K2XWBbFv/L9CGj5AQ8IbbTs85TpFSk40qK5Whu5vxOYnMNB+t4\n"	\
+"Fy7w22S8TEynthW6DSvyHvKswFZJ7CVfDQ8uHMsaRkSbD+W/GmqrUGNqDBGZNvVv\n"	\
+"9WdOHO0Xnfw2u1oFt/0vvWxosL6AYTys6ap33Cs1RHgf3VYuH3pCyyM6nk0i6J/+\n"	\
+"/pUEqdWdxtad1CfDyqefxKWCbGr5dmxkOfk6MhhQyIOjjSKPYC/dF14mCIx3EdUG\n"	\
+"gu1sxen3eTw6AYTi6axqrcgziKXMa4xl2uqVLXvUPu8S3bt4zXB1L+Bku5LaoHST\n"	\
+"DBkk9Xib232TPP/ODDxnHXbrYmU79Sb5leQn6o026Pe7Oyo9sH5BpryVbxzhFMat\n"	\
+"uuMG/R+JpBKyo3Eryg4ONsGy81vqUbFYyiOs+rhQOkKoMYabBwMI/ZqQAPOuMFuO\n"	\
+"z04rshjUGGwCLU18+RlbFpnACr3fQ8p289DVl5ohMq+UnPYBOMQaNZnS7MJegLpO\n"	\
+"uVpf3NMBrrQfjanFxx9ta/gN4Xj/AC93LRo+ap4vPfLmpoFQa5YQSSdK7YlN/SiN\n"	\
+"PGMrF1ZgwxAoSfXI9IdUIz0xW11Res/sFq5mtme20szCChgWgFK+Anhn4U//YDjo\n"	\
+"GBZO6zl+B6B6sBWA0AmZONg1JD9eeio2CyilfXbFIr47qmofLINyxHyuBBTKwcZg\n"	\
+"HXm9+5syQUmBnEigM4AznegAABnFfD0aegLSXwmJX/8qpPmiOOB2FUxaYlKlyD80\n"	\
+"qcPvsDyEFsbwKE6TmXs9S094JuIR+9TetdhGVeaWGDzCVwvvLXrGopvUGeYatjf7\n"	\
+"hP0yjq2wPpiRKz8PVtuNPumN09qnI7FNZ1xBVCRbXGOgg0PWmV6L2c2wiiI+f3Lt\n"	\
+"/fC3YVuOqpO29Uzx/7/7QC+0AzuYP25my5OgZPgr1hXZjcsMsafLTnkaYNFChKim\n"	\
+"eAT14DZcw6mueMXuIZJhVCZ4MpQjJhD1t/aG82kNMmQF1Z2PHUMnDdPl4kZOM9vr\n"	\
+"xGUlixGe7u0+WsqMbVJUMpVAbb2PcvYPTGCyRDd1zGghOzORw6djAaimtpR9Fv8d\n"	\
+"gqavmHNB56dgkw3fSJtVnbae4igpOVYmBJYZ6zVAMCSCL2I44UcqQFINXSfkdjyd\n"	\
+"xmaitqQgQDa1qshWuxI5Z8AxDo2cY3kuc40qZz9hEebO5EJvnJBr9yrqLchY5WS2\n"	\
+"YruUsweidtZeki36m0gplwkmZZrmMaNVe9+pOXLQZMFpjK4aFdHDRmRmndhuEsiv\n"	\
+"2TDAKuBFM8KGGlzPuNo0qLvxlNbn5qDHNf+NUbAfBjSXMNikYbg8GODKO2+czwSi\n"	\
+"gdqfTu9YHwXXK+nVQdYjxCprKObjF0hCQUZR6Dp1wlZLq/xXqa5icr4+vND+Lj9H\n"	\
+"C47zfN9w7WefVkHCBMmvVL6KKmn7bsQfqDBylCX9pMJadz/txngpH6z6QnFYNhtN\n"	\
+"9jR0mI948VlyZ2XQinJ26A==\n"											\
+"-----END ENCRYPTED PRIVATE KEY-----\n"
+
+#define AH_SERVICEREGISTRY_ADDRESS 			"192.168.105.208"
+#define AH_SERVICEREGISTRY_PORT				8443
+#define AH_SERVICEREGISTRY_REGISTER_PATH 	"/serviceregistry/register"
+#define AH_SERVICEREGISTRY_UNREGISTER_PATH 	"/serviceregistry/unregister"
+
+#define AH_ORCHESTRATOR_ADDRESS				"192.168.105.208"
+#define AH_ORCHESTRATOR_PORT				8441
+#define AH_ORCHESTRATOR_ORCHESTRATE_PATH	"/orchestrator/orchestrate"
+
+
+
+#endif /* APPLICATION_CODE_ARROWHEAD_AH_CONFIG_H_ */

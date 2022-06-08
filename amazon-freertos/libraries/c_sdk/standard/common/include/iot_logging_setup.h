@@ -171,7 +171,7 @@
  * IotLog( IOT_LOG_DEBUG, NULL, ... )
  * @endcode
  */
-
+#define LIBRARY_LOG_LEVEL IOT_LOG_DEBUG
 /* Check that LIBRARY_LOG_LEVEL is defined and has a valid value. */
 #if !defined( LIBRARY_LOG_LEVEL ) ||        \
     ( LIBRARY_LOG_LEVEL != IOT_LOG_NONE &&  \

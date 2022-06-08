@@ -37,7 +37,7 @@
 
 void vSensorsDataToMessage( InfineonSensorsData_t *pxSensorsData, InfineonSensorsMessage_t *pxSensorsMessage )
 {
-
+	/* Bind pxSensorStat element to pxSensorMessage Element*/
     StatData_t *pxSensorsStat[] = {
 #if( SENSOR_DPS368_1_ENABLE > 0 )
     		&pxSensorsMessage->fDPS368Temperature_1,

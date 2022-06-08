@@ -35,8 +35,8 @@
 * @{
 */
 
-#include "optiga/common/optiga_lib_types.h"
-#include "optiga/common/optiga_lib_common.h"
+#include "optiga/include/optiga/common/optiga_lib_types.h"
+#include "optiga/include/optiga/common/optiga_lib_common.h"
 
 uint32_t optiga_common_get_uint32 (const uint8_t* p_input_buffer)
 {

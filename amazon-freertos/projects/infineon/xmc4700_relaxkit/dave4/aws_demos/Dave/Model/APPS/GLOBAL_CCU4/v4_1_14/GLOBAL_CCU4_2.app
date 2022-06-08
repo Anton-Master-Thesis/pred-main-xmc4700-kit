@@ -8,7 +8,7 @@
     <downwardMapList xsi:type="ResourceModel:App" href="../../CLOCK_XMC4/v4_0_22/CLOCK_XMC4_0.app#/"/>
   </requiredApps>
   <hwResources name="Global" URI="http://resources/4.1.14/app/GLOBAL_CCU4/2/hwres_peripheral_ccu4_global" resourceGroupUri="peripheral/ccu4/sv0/global" solverVariable="true" mResGrpUri="peripheral/ccu4/sv0/global">
-    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/ccu41/ccu41_1.dd#//@provided.0"/>
+    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/ccu41/ccu41_1.dd#/0/@provided.0"/>
     <solverVarMap index="2">
       <value variableName="sv0" solverValue="1"/>
     </solverVarMap>

@@ -25,6 +25,7 @@
 #include <stdio.h>
 
 #include "mqtt_task.h"
+#include "ah_task.h"
 
 #include "iot_config.h"
 #include "iot_wifi.h"
@@ -104,9 +105,9 @@ static ePingStatus_t prvPing( uint8_t *pucIPAddr, uint16_t usCount, uint32_t ulI
 /** @brief Start the MQTT agent and connects to the broker */
 static BaseType_t prvMqttAgentStartAndConnect( void );
 
-
 void vMqttTaskStart( void )
 {
+	//prvAhRegister();
     if( xMQTTTaskHandle == NULL )
     {
         xTaskCreate( prvMqttTask, "MQTTTask", mqtttaskSTACK_SIZE, NULL, mqtttaskPRIORITY, &xMQTTTaskHandle );
@@ -406,6 +407,9 @@ BaseType_t prvMqttAgentStartAndConnect( void )
             ( void ) MQTT_AGENT_Delete( xMQTTHandle );
             xMQTTHandle = NULL;
             configPRINTF( ( "ERROR:  MQTT echo failed to connect with error %d.\r\n", xMqttRC ) );
+            //prvSendRequest("POST", "192.168.2.120", 8443, "/serviceregistry/register", "{\"test\":3}");
+            prvAhRegister();
+            prvAhOrchestrate();
         }
         else
         {

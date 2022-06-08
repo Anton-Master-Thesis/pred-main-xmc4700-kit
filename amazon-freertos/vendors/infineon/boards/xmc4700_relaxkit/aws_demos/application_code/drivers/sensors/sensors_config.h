@@ -25,7 +25,7 @@
 #define SENSORS_CONFIG_H
 
 /**
- *  1 - sensor disabled
+ *  0 - sensor disabled
  *  1 - sensor enabled
  *  2 - sensor data printf in read function
  */

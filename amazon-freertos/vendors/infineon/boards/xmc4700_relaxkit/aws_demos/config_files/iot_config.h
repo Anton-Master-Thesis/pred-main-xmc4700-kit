@@ -48,7 +48,10 @@
 #define IOT_LOG_LEVEL_MQTT                      IOT_LOG_INFO
 #define AWS_IOT_LOG_LEVEL_SHADOW                IOT_LOG_INFO
 #define AWS_IOT_LOG_LEVEL_DEFENDER              IOT_LOG_INFO
-#define IOT_LOG_LEVEL_HTTPS                     IOT_LOG_INFO
+#define IOT_LOG_LEVEL_HTTPS                     IOT_LOG_DEBUG
+
+#define LIBRARY_LOG_LEVEL						IOT_LOG_INFO
+#define LIBRARY_LOG_NAME						"AH_DEBUG"
 
 /* Platform thread stack size and priority. */
 #define IOT_THREAD_DEFAULT_STACK_SIZE           2048

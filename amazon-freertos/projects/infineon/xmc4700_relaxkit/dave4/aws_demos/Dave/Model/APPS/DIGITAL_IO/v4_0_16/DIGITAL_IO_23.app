@@ -6,7 +6,7 @@
   <virtualSignals name="hardware pin control" URI="http://resources/4.0.16/app/DIGITAL_IO/23/vs_digital_io_hwsel" hwSignal="hw_o" hwResource="//@hwResources.0" required="false"/>
   <virtualSignals name="pin_signal" URI="http://resources/4.0.16/app/DIGITAL_IO/23/__pin_vs_digital_io_pad_pin" hwSignal="pin" hwResource="//@hwResources.1"/>
   <hwResources name="pin" URI="http://resources/4.0.16/app/DIGITAL_IO/23/hwres_port_pin" resourceGroupUri="port/p/sv0/pad/*" solverVariable="true" mResGrpUri="port/p/sv0/pad/*">
-    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/port14/port14_14.dd#//@provided.5"/>
+    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/port14/port14_14.dd#/0/@provided.5"/>
     <solverVarMap index="2">
       <value variableName="sv0" solverValue="14"/>
     </solverVarMap>

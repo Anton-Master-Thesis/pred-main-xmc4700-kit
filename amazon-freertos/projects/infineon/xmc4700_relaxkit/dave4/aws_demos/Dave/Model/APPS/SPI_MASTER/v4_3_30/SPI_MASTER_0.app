@@ -75,10 +75,10 @@
   </requiredApps>
   <requiredApps URI="http://resources/4.3.30/app/SPI_MASTER/0/appres_global_dma" requiredAppName="GLOBAL_DMA" required="false" requiringMode="SHARABLE"/>
   <hwResources name="Channel" URI="http://resources/4.3.30/app/SPI_MASTER/0/hwres_usic_channel" resourceGroupUri="peripheral/usic/*/channel/*" mResGrpUri="peripheral/usic/*/channel/*">
-    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/usic2/usic2_2.dd#//@provided.0"/>
+    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/usic2/usic2_2.dd#/0/@provided.0"/>
   </hwResources>
   <hwResources name="MOSI pin" URI="http://resources/4.3.30/app/SPI_MASTER/0/hwres_port_pad_spi_mosi_0" resourceGroupUri="port/p/sv0/pad/*" solverVariable="true" mResGrpUri="port/p/sv0/pad/*">
-    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/port3/port3_3.dd#//@provided.33"/>
+    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/port3/port3_3.dd#/0/@provided.33"/>
     <solverVarMap index="2">
       <value variableName="sv0" solverValue="3"/>
     </solverVarMap>
@@ -87,12 +87,12 @@
     </solverVarMap>
   </hwResources>
   <hwResources name="MISO pin" URI="http://resources/4.3.30/app/SPI_MASTER/0/hwres_port_pad_spi_mosi_1" resourceGroupUri="port/p/*/pad/*" mResGrpUri="port/p/*/pad/*">
-    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/port3/port3_3.dd#//@provided.29"/>
+    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/port3/port3_3.dd#/0/@provided.29"/>
   </hwResources>
   <hwResources name="MOSI\MISO_2 pin" URI="http://resources/4.3.30/app/SPI_MASTER/0/hwres_port_pad_spi_mosi_2" resourceGroupUri="" required="false" mResGrpUri="port/p/*/pad/*"/>
   <hwResources name="MOSI\MISO_3 pin" URI="http://resources/4.3.30/app/SPI_MASTER/0/hwres_port_pad_spi_mosi_3" resourceGroupUri="" required="false" mResGrpUri="port/p/*/pad/*"/>
   <hwResources name="SCLKOUT pin" URI="http://resources/4.3.30/app/SPI_MASTER/0/hwres_port_pad_spi_sclkout" resourceGroupUri="port/p/*/pad/*" mResGrpUri="port/p/*/pad/*">
-    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/port3/port3_3.dd#//@provided.37"/>
+    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/port3/port3_3.dd#/0/@provided.37"/>
   </hwResources>
   <hwResources name="Slave Select 0 pin" URI="http://resources/4.3.30/app/SPI_MASTER/0/hwres_port_pad_spi_ss_0" resourceGroupUri="" required="false" mResGrpUri="port/p/*/pad/*"/>
   <hwResources name="Slave Select 1 pin" URI="http://resources/4.3.30/app/SPI_MASTER/0/hwres_port_pad_spi_ss_1" resourceGroupUri="" required="false" mResGrpUri="port/p/*/pad/*"/>
@@ -103,10 +103,10 @@
   <hwResources name="Slave Select 6 pin" URI="http://resources/4.3.30/app/SPI_MASTER/0/hwres_port_pad_spi_ss_6" resourceGroupUri="" required="false" mResGrpUri="port/p/*/pad/*"/>
   <hwResources name="Slave Select 7 pin" URI="http://resources/4.3.30/app/SPI_MASTER/0/hwres_port_pad_spi_ss_7" resourceGroupUri="" required="false" mResGrpUri="port/p/*/pad/*"/>
   <hwResources name="NVIC Node Tx" URI="http://resources/4.3.30/app/SPI_MASTER/0/hwres_cpu_nvic_interrupt_tx" resourceGroupUri="peripheral/cpu/0/nvic/interrupt/*" mResGrpUri="peripheral/cpu/0/nvic/interrupt/*">
-    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/cpu/cpu_0.dd#//@provided.33"/>
+    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/cpu/cpu_0.dd#/0/@provided.33"/>
   </hwResources>
   <hwResources name="NVIC Node Rx" URI="http://resources/4.3.30/app/SPI_MASTER/0/hwres_cpu_nvic_interrupt_rx" resourceGroupUri="peripheral/cpu/0/nvic/interrupt/*" mResGrpUri="peripheral/cpu/0/nvic/interrupt/*">
-    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/cpu/cpu_0.dd#//@provided.18"/>
+    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/cpu/cpu_0.dd#/0/@provided.18"/>
   </hwResources>
   <hwResources name="NVIC Node Error" URI="http://resources/4.3.30/app/SPI_MASTER/0/hwres_cpu_nvic_interrupt_error" resourceGroupUri="" required="false" mResGrpUri="peripheral/cpu/0/nvic/interrupt/*"/>
   <hwResources name="Receive DMA Channel" URI="http://resources/4.3.30/app/SPI_MASTER/0/hwres_dma_channel_rx" resourceGroupUri="" required="false" solverVariable="true" mResGrpUri="peripheral/sv1/0/*/*">

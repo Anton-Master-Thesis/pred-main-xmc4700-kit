@@ -16,11 +16,11 @@
   <requiredApps URI="http://resources/4.0.4/app/CAPTURE/0/app_global_ccu8" requiredAppName="GLOBAL_CCU8" required="false" requiringMode="SHARABLE"/>
   <requiredApps URI="http://resources/4.0.4/app/CAPTURE/0/appres_cpu_ctrl" requiredAppName="CPU_CTRL_XMC4" required="false" requiringMode="SHARABLE"/>
   <hwResources name="CC4 Timer" URI="http://resources/4.0.4/app/CAPTURE/0/hwres_ccu4_cc4" resourceGroupUri="peripheral/ccu4/*/cc4/*" mResGrpUri="peripheral/ccu4/*/cc4/*">
-    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/ccu42/ccu42_2.dd#//@provided.0"/>
+    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/ccu42/ccu42_2.dd#/0/@provided.0"/>
   </hwResources>
   <hwResources name="CC8 Timer" URI="http://resources/4.0.4/app/CAPTURE/0/hwres_ccu8_cc8" resourceGroupUri="" required="false" mResGrpUri="peripheral/ccu8/*/cc8/*"/>
   <hwResources name="Capture Input Pin" URI="http://resources/4.0.4/app/CAPTURE/0/hwres_port_pad_capture_in" resourceGroupUri="port/p/*/pad/*" mResGrpUri="port/p/*/pad/*">
-    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/port3/port3_3.dd#//@provided.16"/>
+    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/port3/port3_3.dd#/0/@provided.16"/>
   </hwResources>
   <hwResources name="Capture Event Node" URI="http://resources/4.0.4/app/CAPTURE/0/hwres_cpu_nvic_interrupt_event_0" resourceGroupUri="" required="false" mResGrpUri="peripheral/cpu/0/nvic/interrupt/*"/>
   <hwResources name="Capture Input Pin" URI="http://resources/4.0.4/app/CAPTURE/0/__pin_hwres_port_pad_capture_in" resourceGroupUri="devicepackage/0/131" constraintType="GLOBAL_RESOURCE" mResGrpUri="devicepackage/0/*">

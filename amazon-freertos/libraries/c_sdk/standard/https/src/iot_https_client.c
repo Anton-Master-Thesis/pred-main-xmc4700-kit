@@ -2806,7 +2806,7 @@ IotHttpsReturnCode_t IotHttpsClient_InitializeRequest( IotHttpsRequestHandle_t *
         HTTPS_GOTO_CLEANUP();
     }
 
-    status = _addHeader( pHttpsRequest, HTTPS_HOST_HEADER, FAST_MACRO_STRLEN( HTTPS_HOST_HEADER ), pReqInfo->pHost, pReqInfo->hostLen );
+    status = _addHeader( pHttpsRequest, HTTPS_HOST_HEADER, FAST_MACRO_STRLEN( HTTPS_HOST_HEADER ), /*"192.168.2.120:8443"*/pReqInfo->pHost, /*19*/pReqInfo->hostLen );
 
     if( HTTPS_FAILED( status ) )
     {
