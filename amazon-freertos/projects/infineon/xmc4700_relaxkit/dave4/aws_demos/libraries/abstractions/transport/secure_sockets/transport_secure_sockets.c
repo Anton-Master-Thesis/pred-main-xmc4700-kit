@@ -155,7 +155,7 @@ int32_t SecureSocketsTransport_Send( NetworkContext_t * pNetworkContext,
         }
         else
         {
-            LogError( ( "Failed to send data over network. bytesSent=%d.", bytesSent ) );
+            //LogError( ( "Failed to send data over network. bytesSent=%d.", bytesSent ) );
         }
     }
 

@@ -65,7 +65,7 @@
     #define SdkLogDebugC99( format, ... )    vLoggingPrintfWithFileAndLine( __FILE__, __LINE__, "[DEBUG] [%s] " format "\r\n", LIBRARY_LOG_NAME, ## __VA_ARGS__ )
 #else /* if LOGGING_ENABLE_METADATA_WITH_C99_AND_GNU_EXTENSION == 1 */
     //#define SdkLogError( message )           vLoggingPrintfError message
-	#define SdkLogError( message )			IotLogError( message )
+	#define SdkLogError( message )			IotLogDebug( message )
     #define SdkLogWarn( message )           IotLogWarn( message )//vLoggingPrintfWarn message
     #define SdkLogInfo( message )           IotLogInfo( message )// vLoggingPrintfInfo message
     #define SdkLogDebug( message )          IotLogDebug( message )// vLoggingPrintfDebug message

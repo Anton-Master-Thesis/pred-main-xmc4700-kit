@@ -446,6 +446,14 @@ BaseType_t prvParseOrchResponse(const char* responseBody)
 	}
 
 	cJSON* pResponse = NULL;
+
+	int responseSize = cJSON_GetArraySize(pResponses);
+	if (responseSize == 0)
+	{
+		IotLogInfo("The orchestrator returned 0 options for the service");
+		return pdFAIL;
+	}
+
 	cJSON_ArrayForEach( pResponse, pResponses )
 	{
 		cJSON* pProvider = cJSON_GetObjectItemCaseSensitive(pResponse, "provider");
@@ -529,6 +537,14 @@ BaseType_t prvBuildEhPublishRequest(const char* publishPayload, char* requestBod
 	cJSON_AddItemToObject(pPayload, "data", pData);
 	cJSON_AddItemToObject(pPayload, "signature", pSignature);
 
+	char* pPayloadString = cJSON_Print(pPayload);
+	if(pPayloadString == NULL)
+	{
+		return pdFAIL;
+	}
+
+	cJSON* pJsonPayload = cJSON_CreateString(pPayloadString);
+
 	cJSON* pSource = cJSON_Parse(AH_EVENTHANDLER_EVENT_SOURCE);
 	if (pSource == NULL) {
 		const char* pJsonError = cJSON_GetErrorPtr();
@@ -568,19 +584,19 @@ BaseType_t prvBuildEhPublishRequest(const char* publishPayload, char* requestBod
 
 	cJSON_AddItemToObject(pRequestBody, "eventType", pEventType);
 	cJSON_AddItemToObject(pRequestBody, "metaData", pMetadata);
-	cJSON_AddItemToObject(pRequestBody, "payload", pPayload);
+	cJSON_AddItemToObject(pRequestBody, "payload", pJsonPayload);
 	cJSON_AddItemToObject(pRequestBody, "source", pSource);
 	cJSON_AddItemToObject(pRequestBody, "timeStamp", pTimeStamp);
 
-	requestBody = cJSON_Print(pRequestBody);
-	if (requestBody == NULL)
+	char* pRequestBodyString = cJSON_Print(pRequestBody);
+	if (pRequestBodyString == NULL)
 	{
 		return pdFAIL;
 	}
 
+	memcpy(requestBody, pRequestBodyString, strlen(pRequestBodyString));
+
 	cJSON_Delete(pRequestBody);
-	cJSON_Delete(pSource);
-	cJSON_Delete(pMetadata);
 
 	return pdPASS;
 
