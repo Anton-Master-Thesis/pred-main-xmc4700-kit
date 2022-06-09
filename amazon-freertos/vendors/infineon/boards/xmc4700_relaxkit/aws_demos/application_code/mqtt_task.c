@@ -410,6 +410,7 @@ BaseType_t prvMqttAgentStartAndConnect( void )
             //prvSendRequest("POST", "192.168.2.120", 8443, "/serviceregistry/register", "{\"test\":3}");
             prvAhRegister();
             prvAhOrchestrate();
+            prvAhPublish("test");
         }
         else
         {

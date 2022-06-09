@@ -155,6 +155,9 @@
 		"\"authenticationInfo\": \"\""				\
 	"}"
 
+
+#define AH_EVENTHANDLER_EVENT_TIMESTAMP "2022-06-12T09:56:05Z"
+
 #define LIBRARY_LOG_NAME    ( "AH" )
 
 #define LIBRARY_LOG_LEVEL    LOG_DEBUG

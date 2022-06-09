@@ -88,6 +88,7 @@ uint8_t ucAhTaskNetworkInitialize( void );
 
 BaseType_t prvAhRegister( void );
 BaseType_t prvAhOrchestrate( void );
+BaseType_t prvAhPublish(const char* publishPayload);
 
 BaseType_t prvSendRequest(
 		const char* method,

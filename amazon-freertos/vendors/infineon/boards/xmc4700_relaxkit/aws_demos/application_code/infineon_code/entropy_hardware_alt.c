@@ -27,8 +27,8 @@
 #include "xmc_common.h"
 #include "mbedtls/entropy_poll.h"
 #include "FreeRTOS.h"
-#include "portmacro.h"
-#include "FreeRTOS_IP.h"
+//#include "portmacro.h"
+//#include "FreeRTOS_IP.h"
 
 #if !defined(CONFIG_USE_OPTIGA)
 int mbedtls_hardware_poll(void *data, unsigned char *output, size_t len, size_t *olen)

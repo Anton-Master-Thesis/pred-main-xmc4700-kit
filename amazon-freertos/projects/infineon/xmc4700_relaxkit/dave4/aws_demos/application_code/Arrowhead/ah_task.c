@@ -103,8 +103,8 @@ static BaseType_t prvNetworkConnectionRestart( void );
 static BaseType_t prvAhRegisterAndOrchestrate( void );
 
 static BaseType_t prvParseOrchResponse(const char* responseBody);
-static BaseType_t prvEhPublish( const char* publishPayload);
-static BaseType_t prvBuildEhPublishRequest(const char* publishPayload, const char* requestBody);
+//static BaseType_t prvEhPublish( const char* publishPayload);
+static BaseType_t prvBuildEhPublishRequest(const char* publishPayload, char* requestBody);
 
 
 typedef struct Ah_address
@@ -476,12 +476,32 @@ BaseType_t prvParseOrchResponse(const char* responseBody)
 	return pdFAIL;
 }
 
-BaseType_t prvEhPublish(const char* publishPayload)
+BaseType_t prvAhPublish(const char* publishPayload)
 {
+	BaseType_t xReqSuccess = pdFAIL;
+	char requestBodyBuffer[2048] = { 0 };
+	char respBody[2048] = { 0 };
+
+	xReqSuccess = prvBuildEhPublishRequest(publishPayload, &requestBodyBuffer);
+
+	int statusCode;
+	do
+	{
+		xReqSuccess = prvSendRequest(
+				"POST",
+				ehInfo.pHost,
+				ehInfo.port,
+				ehInfo.pPath,
+				&requestBodyBuffer,
+				&statusCode,
+				&respBody);
+	} while(xReqSuccess == pdFAIL);
+
+	return xReqSuccess;
 
 }
 
-BaseType_t prvBuildEhPublishRequest(const char* publishPayload, const char* requestBody)
+BaseType_t prvBuildEhPublishRequest(const char* publishPayload, char* requestBody)
 {
 	cJSON* pRequestBody = cJSON_CreateObject();
 	if (pRequestBody == NULL)
@@ -540,10 +560,30 @@ BaseType_t prvBuildEhPublishRequest(const char* publishPayload, const char* requ
 		return pdFAIL;
 	}
 
+	cJSON* pTimeStamp = cJSON_CreateString(AH_EVENTHANDLER_EVENT_TIMESTAMP);
+	if (pTimeStamp == NULL)
+	{
+		return pdFAIL;
+	}
+
 	cJSON_AddItemToObject(pRequestBody, "eventType", pEventType);
 	cJSON_AddItemToObject(pRequestBody, "metaData", pMetadata);
 	cJSON_AddItemToObject(pRequestBody, "payload", pPayload);
 	cJSON_AddItemToObject(pRequestBody, "source", pSource);
+	cJSON_AddItemToObject(pRequestBody, "timeStamp", pTimeStamp);
+
+	requestBody = cJSON_Print(pRequestBody);
+	if (requestBody == NULL)
+	{
+		return pdFAIL;
+	}
+
+	cJSON_Delete(pRequestBody);
+	cJSON_Delete(pSource);
+	cJSON_Delete(pMetadata);
+
+	return pdPASS;
+
 }
 
 /* Check that the root CA certificate is defined. */
