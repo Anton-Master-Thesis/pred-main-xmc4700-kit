@@ -327,7 +327,8 @@ void vApplicationDaemonTaskStartupHook( void )
 			LED_xStatus( WIFI, SUCCESS );
 			configPRINTF( ("Connected to the network\r\n") );
 			/* Sensors Task Start inside */
-			vMqttTaskStart();
+			//vMqttTaskStart();
+			vAhTaskStart();
 
 		}
 		else

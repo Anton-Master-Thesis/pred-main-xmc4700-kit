@@ -33,30 +33,30 @@
 
 /* Pressure and Temperature sensors */
 /* -- SPI connection -- */
-#define SENSOR_DPS368_1_ENABLE      ( 1 )
-#define SENSOR_DPS368_2_ENABLE      ( 1 )
-#define SENSOR_DPS368_3_ENABLE      ( 1 )
+#define SENSOR_DPS368_1_ENABLE      ( 0 )
+#define SENSOR_DPS368_2_ENABLE      ( 0 )
+#define SENSOR_DPS368_3_ENABLE      ( 0 )
 /* -- I2C connection -- */
-#define SENSOR_DPS368_4_ENABLE      ( 1 )
-#define SENSOR_DPS368_5_ENABLE      ( 1 )
+#define SENSOR_DPS368_4_ENABLE      ( 0 )
+#define SENSOR_DPS368_5_ENABLE      ( 0 )
 
 /* Magnetic Current sensors */
 /* -- ADC connection -- */
-#define SENSOR_TLI4971_1_ENABLE     ( 1 )
-#define SENSOR_TLI4971_2_ENABLE     ( 1 )
+#define SENSOR_TLI4971_1_ENABLE     ( 0 )
+#define SENSOR_TLI4971_2_ENABLE     ( 0 )
 #define SENSOR_TLI4971_3_ENABLE     ( 1 )
 
 /* Linear Hall sensor */
 /* -- ADC connection -- */
-#define SENSOR_TLE4997_1_ENABLE   	( 1 )
+#define SENSOR_TLE4997_1_ENABLE   	( 0 )
 
 /* Hall sensors */
 /* -- GPIO connection -- */
-#define SENSOR_TLE4964_1_ENABLE     ( 1 )
-#define SENSOR_TLE4961_3K_1_ENABLE  ( 1 )
-#define SENSOR_TLE4913_1_ENABLE     ( 1 )
-#define SENSOR_TLE4961_1K_1_ENABLE  ( 1 )
-#define SENSOR_TLI4966_1_ENABLE     ( 1 )
+#define SENSOR_TLE4964_1_ENABLE     ( 0 )
+#define SENSOR_TLE4961_3K_1_ENABLE  ( 0 )
+#define SENSOR_TLE4913_1_ENABLE     ( 0 )
+#define SENSOR_TLE4961_1K_1_ENABLE  ( 0 )
+#define SENSOR_TLI4966_1_ENABLE     ( 0 )
 
 /* Microphone */
 /* -- I2S connection -- */
@@ -64,7 +64,7 @@
 
 /* 3D Magnetic sensors */
 /* -- I2C connection -- */
-#define SENSOR_TLI493D_1_ENABLE     ( 1 )
+#define SENSOR_TLI493D_1_ENABLE     ( 0 )
 
 
 #endif /* SENSORS_CONFIG_H */

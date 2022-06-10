@@ -34,6 +34,7 @@
 #include "iot_https_client.h"
 #include "iot_https_utils.h"
 #include "http_parser.h"
+#include "sensors_task.h"
 //#include "iot_mqtt_agent.h"
 //#include "types/iot_mqtt_types.h"
 
@@ -59,6 +60,8 @@
 
 #include "cJSON.h"
 #include "core_http_config.h"
+#include "queue.h"
+#include "mqtt_task.h"
 
 /* Packaging for Sensor data */
 static InfineonSensorsMessage_t xSensorsMessage;
@@ -179,9 +182,9 @@ void prvAhTask( void *pvParameters )
     if( xStatus == pdPASS )
 	{
 		/** Initialize the Sensors Data Queue */
-		xSensorAhMessageQueueHandle = xQueueCreate( ahtaskSENSOR_RECEIVE_QUEUE_LENGTH, sizeof( InfineonSensorsMessage_t ) );
+    	xMQTTMessageQueueHandle = xQueueCreate( ahtaskSENSOR_RECEIVE_QUEUE_LENGTH, sizeof( InfineonSensorsMessage_t ) );
 
-		if( xSensorAhMessageQueueHandle == NULL )
+		if( xMQTTMessageQueueHandle == NULL )
 		{
 			xStatus = pdFAIL;
 		}
@@ -205,13 +208,13 @@ void prvAhTask( void *pvParameters )
 
     if ( xStatus == pdPASS )
     {
-    	vSensorTaskStart();
+    	vSensorsTaskStart();
 
     	for( ;; )
     	{
     		if( eConnStatus == eConnEstablished )
     		{
-    			if( xQueueRecieve( xSensorAhMessageQueueHandle, &xSensorsMessage, portMAX_DELAY ) )
+    			if( xQueueReceive( xMQTTMessageQueueHandle, &xSensorsMessage, portMAX_DELAY ) )
     			{
     				configPRINTF( ("Queue Receive\r\n") );
 
@@ -226,13 +229,15 @@ void prvAhTask( void *pvParameters )
     				CSV_vGenerateToSend( &xSensorMessage, pcAHBuffer );
 #endif
 
-    				//TODO send to eventhandler
     				if( xIotMqttState == IOT_MQTT_SUCCESS )
     				{
     					IotMutex_Lock( &xNetworkMutex );
 
-    					// xStatus = EH_Publish
-    					if( xStatus == 0 /* http code ok*/) {
+    					//char* publishPayload = { 0 };
+    					//memcpy(publishPayload, &pcAHBuffer, sizeof(pcAHBuffer));
+
+    					xStatus = prvAhPublish(&pcAHBuffer);
+    					if( xStatus == pdPASS) {
     						LED_xStatus( MESSAGE, SUCCESS );
     						configPRINTF( ("Message sent successfully\r\n") );
     						ucPublishErrorCount = 0;
@@ -251,7 +256,7 @@ void prvAhTask( void *pvParameters )
 							}
     					}
 
-    					IotMutexUnlock( &xNetworkMutex );
+    					IotMutex_Unlock( &xNetworkMutex );
     				}
     			}
     			else
@@ -290,7 +295,7 @@ void prvAhTask( void *pvParameters )
     				break;
     			case eORError2:
     			case eEHError2:
-    				if( prvAhReorchestrate() == pdPASS )
+    				if( prvAhOrchestrate() == pdPASS )
     				{
     					eConnStatus = eConnEstablished;
     				}
@@ -326,7 +331,7 @@ BaseType_t prvNetworkConnectionRestart( void )
 	vTaskDelay( 1 );
 
 
-	if( true /* if deregistered from SR */ )
+	if( prvAhUnregister() == pdPASS )
 	{
 		configPRINTF( ("Disabling network\r\n") );
 		if( AwsIotNetworkManager_DisableNetwork( configENABLED_NETWORKS ) != configENABLED_NETWORKS )
@@ -381,6 +386,21 @@ BaseType_t prvNetworkConnectionRestart( void )
 	return ( status == EXIT_SUCCESS ) ? pdPASS : pdFAIL;
 }
 
+BaseType_t prvAhRegisterAndOrchestrate( void )
+{
+	BaseType_t xStatus = pdFAIL;
+	xStatus = prvAhRegister();
+
+	if(xStatus == pdFAIL)
+	{
+		return pdFAIL;
+	}
+
+	xStatus = prvAhOrchestrate();
+
+	return xStatus;
+}
+
 BaseType_t prvAhRegister( void )
 {
 	int statusCode;
@@ -397,8 +417,29 @@ BaseType_t prvAhRegister( void )
 				AH_SERVICEREGISTRY_REQUEST_BODY,
 				&statusCode,
 				&respBody);
-		IotLogInfo("Sent request with response %d", statusCode);
 	}
+	IotLogInfo("Contact with ServiceRegistry established");
+	return xReqSuccess;
+}
+
+BaseType_t prvAhUnregister( void )
+{
+	int statusCode;
+	char respBody[2048];
+
+	BaseType_t xReqSuccess = pdFAIL;
+	while (xReqSuccess == pdFAIL)
+	{
+		xReqSuccess = prvSendRequest(
+				"DELETE",
+				AH_SERVICEREGISTRY_ADDRESS,
+				AH_SERVICEREGISTRY_PORT,
+				AH_SERVICEREGISTRY_UNREGISTER_PATH,
+				"",
+				&statusCode,
+				&respBody);
+	}
+
 	IotLogInfo("Contact with ServiceRegistry established");
 	return xReqSuccess;
 }
@@ -492,6 +533,11 @@ BaseType_t prvAhPublish(const char* publishPayload)
 
 	xReqSuccess = prvBuildEhPublishRequest(publishPayload, &requestBodyBuffer);
 
+	if (xReqSuccess == pdFAIL)
+	{
+		return pdFAIL;
+	}
+
 	int statusCode;
 	do
 	{
@@ -522,11 +568,25 @@ BaseType_t prvBuildEhPublishRequest(const char* publishPayload, char* requestBod
 	{
 		return pdFAIL;
 	}
-	cJSON* pData = cJSON_CreateString(publishPayload);
+
+	cJSON* pDataJson = cJSON_Parse(publishPayload);
+	if (pDataJson == NULL) {
+		const char* pJsonError = cJSON_GetErrorPtr();
+		if (pJsonError != NULL)
+		{
+			IotLogInfo("Error whilst parsing before %s\n", pJsonError);
+		}
+		cJSON_Delete(pDataJson);
+		cJSON_Delete(pRequestBody);
+		cJSON_Delete(pPayload);
+		return pdFAIL;
+	}
+
+	/*cJSON* pData = cJSON_CreateString(publishPayload);
 	if (pData == NULL)
 	{
 		return pdFAIL;
-	}
+	}*/
 
 	cJSON* pSignature = cJSON_CreateString("");
 	if (pSignature == NULL)
@@ -534,16 +594,25 @@ BaseType_t prvBuildEhPublishRequest(const char* publishPayload, char* requestBod
 		return pdFAIL;
 	}
 
-	cJSON_AddItemToObject(pPayload, "data", pData);
+	cJSON_AddItemToObject(pPayload, "data", pDataJson);
 	cJSON_AddItemToObject(pPayload, "signature", pSignature);
 
-	char* pPayloadString = cJSON_Print(pPayload);
+	const char* pPayloadString = cJSON_PrintUnformatted(pPayload);
 	if(pPayloadString == NULL)
 	{
+		const char* pJsonError = cJSON_GetErrorPtr();
+		if (pJsonError != NULL)
+		{
+			IotLogInfo("Error whilst parsing before %s\n", pJsonError);
+		}
 		return pdFAIL;
 	}
 
+	cJSON_Delete(pPayload);
+
 	cJSON* pJsonPayload = cJSON_CreateString(pPayloadString);
+
+	free(pPayloadString);
 
 	cJSON* pSource = cJSON_Parse(AH_EVENTHANDLER_EVENT_SOURCE);
 	if (pSource == NULL) {
@@ -595,6 +664,8 @@ BaseType_t prvBuildEhPublishRequest(const char* publishPayload, char* requestBod
 	}
 
 	memcpy(requestBody, pRequestBodyString, strlen(pRequestBodyString));
+
+	free(pRequestBodyString);
 
 	cJSON_Delete(pRequestBody);
 

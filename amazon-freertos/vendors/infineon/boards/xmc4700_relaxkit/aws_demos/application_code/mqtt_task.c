@@ -411,6 +411,7 @@ BaseType_t prvMqttAgentStartAndConnect( void )
             prvAhRegister();
             prvAhOrchestrate();
             prvAhPublish("test");
+            prvAhUnregister();
         }
         else
         {
