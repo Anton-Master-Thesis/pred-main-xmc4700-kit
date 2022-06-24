@@ -95,12 +95,14 @@
 "9jR0mI948VlyZ2XQinJ26A==\n"											\
 "-----END ENCRYPTED PRIVATE KEY-----\n"
 
-#define AH_SERVICEREGISTRY_ADDRESS 			"192.168.2.120"
+//#define AH_SERVICEREGISTRY_ADDRESS 			"192.168.2.120"
+#define AH_SERVICEREGISTRY_ADDRESS 			"192.168.167.131"
 #define AH_SERVICEREGISTRY_PORT				8443
 #define AH_SERVICEREGISTRY_REGISTER_PATH 	"/serviceregistry/register"
 #define AH_SERVICEREGISTRY_UNREGISTER_PATH 	"/serviceregistry/unregister?address=127.0.0.1&port=8911&service_definition=xensive&service_uri=eventhandler&system_name=xensivekit"
 
-#define AH_ORCHESTRATOR_ADDRESS				"192.168.2.120"
+//#define AH_ORCHESTRATOR_ADDRESS				"192.168.2.120"
+#define AH_ORCHESTRATOR_ADDRESS				"192.168.167.131"
 #define AH_ORCHESTRATOR_PORT				8441
 #define AH_ORCHESTRATOR_ORCHESTRATE_PATH	"/orchestrator/orchestration"
 
@@ -156,7 +158,7 @@
 	"}"
 
 
-#define AH_EVENTHANDLER_EVENT_TIMESTAMP "2022-06-12T09:56:05Z"
+#define AH_EVENTHANDLER_EVENT_TIMESTAMP "2022-06-21T09:56:05Z"
 
 #define LIBRARY_LOG_NAME    ( "AH" )
 

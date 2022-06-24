@@ -97,17 +97,18 @@ static void prvAhTask( void *pvParameters );
 //static BaseType_t prvCreateRobustTask ( void );
 //static void prvDeleteRobustTask( void );
 static BaseType_t prvNetworkConnectionRestart( void );
-//static BaseType_t prvAhRegister( void );
-//static BaseType_t prvAhOrchestrate( void );
-
+static BaseType_t prvAhRegister( void );
+static BaseType_t prvAhOrchestrate( void );
+static BaseType_t prvAhPublish(const char* publishPayload);
+static BaseType_t prvAhUnregister( void );
 //static ePingStatus_t prvPing( uint8_t *pucIPAddr, uint16_t usCount, uint32_t ulIntervalMS );
 
 /** @brief Publishes service to Service Registry and completes Orchestration process */
 static BaseType_t prvAhRegisterAndOrchestrate( void );
 
 static BaseType_t prvParseOrchResponse(const char* responseBody);
-//static BaseType_t prvEhPublish( const char* publishPayload);
 static BaseType_t prvBuildEhPublishRequest(const char* publishPayload, char* requestBody);
+static BaseType_t prvSendRequest(const char* method, const char* host, int port, const char* path, const char* reqBody, int* respCode, char* respBody);
 
 
 typedef struct Ah_address
@@ -401,6 +402,10 @@ BaseType_t prvAhRegisterAndOrchestrate( void )
 	return xStatus;
 }
 
+/**
+ * Registers the service configured in ah_config.h
+ *
+ */
 BaseType_t prvAhRegister( void )
 {
 	int statusCode;
@@ -422,6 +427,11 @@ BaseType_t prvAhRegister( void )
 	return xReqSuccess;
 }
 
+/**
+ * Unregisters the service registered by prvAhRegister.
+ * Path variables in AH_SERVICEREGISTRY_UNREGISTER_PATH in ah_config.h need to match the service registered.
+ *
+ */
 BaseType_t prvAhUnregister( void )
 {
 	int statusCode;
@@ -444,6 +454,10 @@ BaseType_t prvAhUnregister( void )
 	return xReqSuccess;
 }
 
+/**
+ * Orchestrates the publish service from the orchestrator.
+ * The service orchestrated is configured in ah_config.h
+ */
 BaseType_t prvAhOrchestrate( void )
 {
 	BaseType_t xReqSuccess = pdFAIL;
@@ -467,8 +481,12 @@ BaseType_t prvAhOrchestrate( void )
 	return xReqSuccess;
 }
 
+/**
+ * Parses the response from the orchestrator and gets the detail to connect to the EventHandler
+ */
 BaseType_t prvParseOrchResponse(const char* responseBody)
 {
+	// Parse the response body and convert it to a json struct
 	cJSON* pBody = cJSON_Parse(responseBody);
 	if (pBody == NULL) {
 		const char* pJsonError = cJSON_GetErrorPtr();
@@ -480,6 +498,7 @@ BaseType_t prvParseOrchResponse(const char* responseBody)
 		return pdFAIL;
 	}
 
+	// Take out the response object from body
 	cJSON* pResponses = cJSON_DetachItemFromObjectCaseSensitive(pBody, "response");
 	if ( pResponses == NULL ) {
 		cJSON_Delete(pBody);
@@ -488,6 +507,7 @@ BaseType_t prvParseOrchResponse(const char* responseBody)
 
 	cJSON* pResponse = NULL;
 
+	// Check if there are any responses, if not either the EventHandler is not running or this system is not authorized
 	int responseSize = cJSON_GetArraySize(pResponses);
 	if (responseSize == 0)
 	{
@@ -495,8 +515,10 @@ BaseType_t prvParseOrchResponse(const char* responseBody)
 		return pdFAIL;
 	}
 
+	// Easiest way to get the first response is to loop through the array and then return once the data is gathered
 	cJSON_ArrayForEach( pResponse, pResponses )
 	{
+		// Get the required data to the publish service
 		cJSON* pProvider = cJSON_GetObjectItemCaseSensitive(pResponse, "provider");
 		cJSON* pServiceUri = cJSON_GetObjectItemCaseSensitive(pResponse, "serviceUri");
 		if ( pProvider == NULL )
@@ -513,6 +535,7 @@ BaseType_t prvParseOrchResponse(const char* responseBody)
 			return pdFAIL;
 		}
 
+		// Store the data for use in prvAhPublish
 		ehInfo.pHost = pAddress->valuestring;
 		ehInfo.hostSize = strlen(pAddress->valuestring);
 		ehInfo.port = pPort->valuedouble;
@@ -524,7 +547,9 @@ BaseType_t prvParseOrchResponse(const char* responseBody)
 
 	return pdFAIL;
 }
-
+/**
+ * Publishes the data from publishPayload in the format which the EvenHandler expects
+ */
 BaseType_t prvAhPublish(const char* publishPayload)
 {
 	BaseType_t xReqSuccess = pdFAIL;
@@ -555,6 +580,9 @@ BaseType_t prvAhPublish(const char* publishPayload)
 
 }
 
+/**
+ * Builds the Publish request as the EventHandler expects
+ */
 BaseType_t prvBuildEhPublishRequest(const char* publishPayload, char* requestBody)
 {
 	cJSON* pRequestBody = cJSON_CreateObject();
@@ -717,6 +745,16 @@ static BaseType_t prvSendHttpRequest(
 
 static uint8_t ucUserBuffer[ democonfigUSER_BUFFER_LENGTH ];
 
+/**
+ * Opens a tcp connection and sends an HTTP request to the designated address, port, path
+ * @param[in] method, the https method which is to be used in the request.
+ * @param[in] host, the host for which the request is to be sent to.
+ * @param[in] port, the port for which the request is to be sent to.
+ * @param[in] path, the path for which the request is to be sent to.
+ * @param[in] reqBody, the request body which is the be sent with the request.
+ * @param[out] respCode, supposed to be the http response code, however due to a bug with coreHTTP it is not updated.
+ * @param[out] respBody, the body of the response from the server.
+ */
 BaseType_t prvSendRequest(const char* method, const char* host, int port, const char* path, const char* reqBody, int* respCode, char* respBody)
 {
 	/* The transport layer interface used by the HTTP Client library. */
@@ -822,6 +860,11 @@ BaseType_t prvSendRequest(const char* method, const char* host, int port, const 
 	return xDemoStatus;
 }
 
+/**
+ * Establishes a tcp connection to the host, port.
+ * SecureSocketsTransport_Connect fails to establish connection to the serviceregistry whilst still returning TRANSPORT_SOCKET_STATUS_SUCCESS
+ * Might be a bug with SR or the function
+ */
 static BaseType_t prvConnectToServer( NetworkContext_t * pxNetworkContext,const char* host, int port )
 {
     ServerInfo_t xServerInfo = { 0 };
@@ -865,6 +908,18 @@ static BaseType_t prvConnectToServer( NetworkContext_t * pxNetworkContext,const 
     return xStatus;
 }
 
+/**
+ * Sends an http request to an already opened tcp connection.
+ * @param[in] pcMethod, the method for the http request, don't know if all http method works but GET, POST, DELETE works.
+ * @param[in] xMethodLen, not used insted using strlen(pcMethod).
+ * @param[in] pcPath, the path used for the http request.
+ * @param[in] xPathLen, not used instead using strlen(pcPath).
+ * @param[in] pHost, need to include host and port when using ip address (<host>:<port>)
+ * @param[in] pBody, the body for which is to be sent with the request.
+ * @param[out] respCode, supposed to handle the http response code, does not work due to bug with coreHTTP
+ * @param[out] respBody, the body of the response.
+ *
+ */
 static BaseType_t prvSendHttpRequest( const TransportInterface_t * pxTransportInterface,
                                       const char * pcMethod,
                                       size_t xMethodLen,

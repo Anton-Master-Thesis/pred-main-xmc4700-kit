@@ -86,18 +86,4 @@ void vAhTaskDelete( void );
 /* Initialize network, manager and libraries */
 uint8_t ucAhTaskNetworkInitialize( void );
 
-BaseType_t prvAhRegister( void );
-BaseType_t prvAhOrchestrate( void );
-BaseType_t prvAhPublish(const char* publishPayload);
-BaseType_t prvAhUnregister( void );
-
-BaseType_t prvSendRequest(
-		const char* method,
-		const char* host,
-		int port,
-		const char* path,
-		const char* reqBody,
-		int* respCode,
-		char* respBody);
-
 #endif /* APPLICATION_CODE_ARROWHEAD_AH_TASK_H_ */

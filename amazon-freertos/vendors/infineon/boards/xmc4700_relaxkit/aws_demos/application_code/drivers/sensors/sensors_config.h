@@ -44,7 +44,7 @@
 /* -- ADC connection -- */
 #define SENSOR_TLI4971_1_ENABLE     ( 0 )
 #define SENSOR_TLI4971_2_ENABLE     ( 0 )
-#define SENSOR_TLI4971_3_ENABLE     ( 1 )
+#define SENSOR_TLI4971_3_ENABLE     ( 0 )
 
 /* Linear Hall sensor */
 /* -- ADC connection -- */

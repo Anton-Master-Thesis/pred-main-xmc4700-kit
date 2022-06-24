@@ -125,15 +125,15 @@
  *
  * @todo If you are using Wi-Fi, set this to your network name.
  */
-#define clientcredentialWIFI_SSID                    /*"infn"*/ "Speedy Wifi"
-//#define clientcredentialWIFI_SSID						"Greger"
+//#define clientcredentialWIFI_SSID                    /*"infn"*/ "Speedy Wifi"
+#define clientcredentialWIFI_SSID						"Greger"
 
 /*
  * @brief Password needed to join Wi-Fi network.
  * @todo If you are using WPA, set this to your network password.
  */
-#define clientcredentialWIFI_PASSWORD                /*"12345678"*/ "FrappePhonePad0918"
-//#define clientcredentialWIFI_PASSWORD					"hejsanoscar"
+//#define clientcredentialWIFI_PASSWORD                /*"12345678"*/ "FrappePhonePad0918"
+#define clientcredentialWIFI_PASSWORD					"hejsanoscar"
 
 /*
  * @brief Wi-Fi network security type.
