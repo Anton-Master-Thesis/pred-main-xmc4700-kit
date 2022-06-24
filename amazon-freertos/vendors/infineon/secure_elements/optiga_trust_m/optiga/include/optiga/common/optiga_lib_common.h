@@ -44,7 +44,8 @@ extern "C" {
 
 #include "optiga/optiga_lib_config.h"
 #include "optiga/common/optiga_lib_types.h"
-#include "optiga/common/optiga_lib_return_codes.h"
+//#include "optiga/common/optiga_lib_return_codes.h"
+#include "optiga_lib_return_codes.h"
 
 ///Instance id of OPTIGA slave
 #define OPTIGA_INSTANCE_ID_0                              (0x00)

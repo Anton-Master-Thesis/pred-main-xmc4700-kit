@@ -27,5 +27,7 @@
 /* Converts a floating point number to string */
 char * ftoa( float n, char *res );
 
+int intToStr( int x, char str[], int d );
+
 
 #endif /* FLOAT_TO_STRING_H */

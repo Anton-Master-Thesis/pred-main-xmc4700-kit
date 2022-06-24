@@ -39,21 +39,21 @@
     <downwardMapList xsi:type="ResourceModel:App" href="../../CLOCK_XMC4/v4_0_22/CLOCK_XMC4_0.app#/"/>
   </requiredApps>
   <hwResources name="Limit" URI="http://resources/4.0.22/app/GLOBAL_ADC/0/hwres_vadc_global_Limit" resourceGroupUri="peripheral/vadc/*/global_limits" mResGrpUri="peripheral/vadc/*/global_limits">
-    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/vadc/vadc_0.dd#//@provided.17"/>
+    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/vadc/vadc_0.dd#/0/@provided.17"/>
   </hwResources>
   <hwResources name="Global" URI="http://resources/4.0.22/app/GLOBAL_ADC/0/hwres_vadc_global" resourceGroupUri="peripheral/vadc/*/global" mResGrpUri="peripheral/vadc/*/global">
-    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/vadc/vadc_0.dd#//@provided.9"/>
+    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/vadc/vadc_0.dd#/0/@provided.9"/>
   </hwResources>
   <hwResources name="Group0" URI="http://resources/4.0.22/app/GLOBAL_ADC/0/hwres_vadc_group0" resourceGroupUri="peripheral/vadc/*/group/0/config" mResGrpUri="peripheral/vadc/*/group/0/config">
-    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/vadc/vadc_0.dd#//@provided.7"/>
+    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/vadc/vadc_0.dd#/0/@provided.7"/>
   </hwResources>
   <hwResources name="Group1" URI="http://resources/4.0.22/app/GLOBAL_ADC/0/hwres_vadc_group1" resourceGroupUri="peripheral/vadc/*/group/1/config" mResGrpUri="peripheral/vadc/*/group/1/config">
-    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/vadc/vadc_0.dd#//@provided.21"/>
+    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/vadc/vadc_0.dd#/0/@provided.21"/>
   </hwResources>
   <hwResources name="Group2" URI="http://resources/4.0.22/app/GLOBAL_ADC/0/hwres_vadc_group2" resourceGroupUri="peripheral/vadc/*/group/2/config" mResGrpUri="peripheral/vadc/*/group/2/config">
-    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/vadc/vadc_0.dd#//@provided.0"/>
+    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/vadc/vadc_0.dd#/0/@provided.0"/>
   </hwResources>
   <hwResources name="Group3" URI="http://resources/4.0.22/app/GLOBAL_ADC/0/hwres_vadc_group3" resourceGroupUri="peripheral/vadc/*/group/3/config" mResGrpUri="peripheral/vadc/*/group/3/config">
-    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/vadc/vadc_0.dd#//@provided.8"/>
+    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/vadc/vadc_0.dd#/0/@provided.8"/>
   </hwResources>
 </ResourceModel:App>

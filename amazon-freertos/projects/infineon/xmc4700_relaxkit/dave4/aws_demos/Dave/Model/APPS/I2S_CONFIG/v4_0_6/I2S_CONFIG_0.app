@@ -27,7 +27,7 @@
     <downwardMapList xsi:type="ResourceModel:App" href="../../CLOCK_XMC4/v4_0_22/CLOCK_XMC4_0.app#/"/>
   </requiredApps>
   <hwResources name="Channel" URI="http://resources/4.0.6/app/I2S_CONFIG/0/hwres_usic_channel" resourceGroupUri="peripheral/usic/0/channel/1" constraintType="GLOBAL_RESOURCE" mResGrpUri="peripheral/usic/*/channel/*">
-    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/usic0/usic0_0.dd#//@provided.43"/>
+    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/usic0/usic0_0.dd#/0/@provided.43"/>
   </hwResources>
   <connections URI="http://resources/4.0.6/app/I2S_CONFIG/0/http://resources/4.0.6/app/I2S_CONFIG/0/vs_i2s_dout0/http://resources/4.0.6/app/I2S_CONFIG/0/vs_i2s_dx0ins" systemDefined="true" sourceSignal="Serial Data Out" targetSignal="Serial Data In" required="false" srcVirtualSignal="//@virtualSignals.4" targetVirtualSignal="//@virtualSignals.0"/>
   <connections URI="http://resources/4.0.6/app/I2S_CONFIG/0/http://resources/4.0.6/app/I2S_CONFIG/0/vs_i2s_sclkout/http://resources/4.0.16/app/DIGITAL_IO/31/vs_digital_io_pad_pin" sourceSignal="sclkout" targetSignal="pin" srcVirtualSignal="//@virtualSignals.7">

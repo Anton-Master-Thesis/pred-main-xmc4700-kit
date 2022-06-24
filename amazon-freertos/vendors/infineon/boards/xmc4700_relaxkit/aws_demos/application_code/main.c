@@ -72,6 +72,7 @@
 /* Main Threads headers includes */
 #include "mqtt_task.h"
 #include "sensors_task.h"
+#include "ah_task.h"
 
 /* Application Definitions headers includes */
 #include "app_error.h"
@@ -185,6 +186,7 @@ int main( void )
     /* Start the scheduler.  Initialization that requires the OS to be running,
      * including the WiFi initialization, is performed in the RTOS daemon task
      * startup hook. */
+
     vTaskStartScheduler();
 
     return 0;
@@ -325,7 +327,8 @@ void vApplicationDaemonTaskStartupHook( void )
 			LED_xStatus( WIFI, SUCCESS );
 			configPRINTF( ("Connected to the network\r\n") );
 			/* Sensors Task Start inside */
-			vMqttTaskStart();
+			//vMqttTaskStart();
+			vAhTaskStart();
 
 		}
 		else

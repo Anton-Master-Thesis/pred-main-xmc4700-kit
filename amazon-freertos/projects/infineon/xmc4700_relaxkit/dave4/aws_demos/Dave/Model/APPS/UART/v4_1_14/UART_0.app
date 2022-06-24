@@ -34,17 +34,19 @@
   </requiredApps>
   <requiredApps URI="http://resources/4.1.14/app/UART/0/appres_global_dma" requiredAppName="GLOBAL_DMA" required="false" requiringMode="SHARABLE"/>
   <hwResources name="Channel" URI="http://resources/4.1.14/app/UART/0/hwres_usic_ch" resourceGroupUri="peripheral/usic/*/channel/*" mResGrpUri="peripheral/usic/*/channel/*">
-    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/usic1/usic1_1.dd#//@provided.0"/>
+    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/usic1/usic1_1.dd#/0/@provided.0"/>
   </hwResources>
-  <hwResources name="Receive Pin" URI="http://resources/4.1.14/app/UART/0/hwres_port_pad_uart_rx" resourceGroupUri="port/p/*/pad/*" mResGrpUri="port/p/*/pad/*"/>
+  <hwResources name="Receive Pin" URI="http://resources/4.1.14/app/UART/0/hwres_port_pad_uart_rx" resourceGroupUri="port/p/*/pad/*" mResGrpUri="port/p/*/pad/*">
+    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/port2/port2_2.dd#/1/@provided.6"/>
+  </hwResources>
   <hwResources name="Transmit Pin" URI="http://resources/4.1.14/app/UART/0/hwres_port_pad_uart_tx" resourceGroupUri="port/p/*/pad/*" mResGrpUri="port/p/*/pad/*">
-    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/port2/port2_2.dd#//@provided.0"/>
+    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/port2/port2_2.dd#/0/@provided.0"/>
   </hwResources>
   <hwResources name="NVIC Node Tx" URI="http://resources/4.1.14/app/UART/0/hwres_nvic_node_tx" resourceGroupUri="peripheral/cpu/0/nvic/interrupt/95" constraintType="GLOBAL_RESOURCE" mResGrpUri="peripheral/cpu/0/nvic/interrupt/*">
-    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/cpu/cpu_0.dd#//@provided.27"/>
+    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/cpu/cpu_0.dd#/0/@provided.27"/>
   </hwResources>
   <hwResources name="NVIC Node Rx" URI="http://resources/4.1.14/app/UART/0/hwres_nvic_node_rx" resourceGroupUri="peripheral/cpu/0/nvic/interrupt/94" constraintType="GLOBAL_RESOURCE" mResGrpUri="peripheral/cpu/0/nvic/interrupt/*">
-    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/cpu/cpu_0.dd#//@provided.23"/>
+    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/cpu/cpu_0.dd#/0/@provided.23"/>
   </hwResources>
   <hwResources name="NVIC Node Error" URI="http://resources/4.1.14/app/UART/0/hwres_nvic_node_error" resourceGroupUri="" required="false" mResGrpUri="peripheral/cpu/0/nvic/interrupt/*"/>
   <hwResources name="DMA channel Tx" URI="http://resources/4.1.14/app/UART/0/hwres_dma_ch_tx" resourceGroupUri="" required="false" solverVariable="true" mResGrpUri="peripheral/sv0/0/ch/*">

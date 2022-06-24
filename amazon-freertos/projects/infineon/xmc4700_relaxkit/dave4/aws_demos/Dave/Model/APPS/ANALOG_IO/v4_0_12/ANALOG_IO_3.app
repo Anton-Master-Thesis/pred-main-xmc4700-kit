@@ -8,7 +8,7 @@
   <virtualSignals name="hw_pull_ctrl" URI="http://resources/4.0.12/app/ANALOG_IO/3/vs_analog_io_hwp" hwSignal="hw_p" hwResource="//@hwResources.0" required="false"/>
   <virtualSignals name="pin_signal" URI="http://resources/4.0.12/app/ANALOG_IO/3/__pin_vs_analog_io_pad_pin" hwSignal="pin" hwResource="//@hwResources.1"/>
   <hwResources name="pin" URI="http://resources/4.0.12/app/ANALOG_IO/3/hwres_port_pin" resourceGroupUri="port/p/sv0/pad/*" solverVariable="true" mResGrpUri="port/p/sv0/pad/*">
-    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/port15/port15_15.dd#//@provided.15"/>
+    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/port15/port15_15.dd#/0/@provided.15"/>
     <solverVarMap index="2">
       <value variableName="sv0" solverValue="15"/>
     </solverVarMap>

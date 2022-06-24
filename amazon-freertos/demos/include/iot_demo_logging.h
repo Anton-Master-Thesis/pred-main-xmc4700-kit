@@ -39,15 +39,17 @@
  * - IOT_LOG_LEVEL_GLOBAL if defined and IOT_LOG_LEVEL_DEMO is undefined.
  * - IOT_LOG_NONE if neither IOT_LOG_LEVEL_DEMO nor IOT_LOG_LEVEL_GLOBAL are defined.
  */
-#ifdef IOT_LOG_LEVEL_DEMO
-    #define LIBRARY_LOG_LEVEL        IOT_LOG_LEVEL_DEMO
-#else
-    #ifdef IOT_LOG_LEVEL_GLOBAL
-        #define LIBRARY_LOG_LEVEL    IOT_LOG_LEVEL_GLOBAL
-    #else
-        #define LIBRARY_LOG_LEVEL    IOT_LOG_NONE
-    #endif
-#endif
+//#ifdef IOT_LOG_LEVEL_DEMO
+//    #define LIBRARY_LOG_LEVEL        IOT_LOG_DEBUG
+//#else
+//    #ifdef IOT_LOG_LEVEL_GLOBAL
+//        #define LIBRARY_LOG_LEVEL    IOT_LOG_NONE
+//    #else
+//        #define LIBRARY_LOG_LEVEL    IOT_LOG_NONE
+//    #endif
+//#endif
+
+//#define LIBRARY_LOG_LEVEL IOT_LOG_DEBUG
 
 /* Set the library name to print with the demos. */
 #define LIBRARY_LOG_NAME    ( "DEMO" )

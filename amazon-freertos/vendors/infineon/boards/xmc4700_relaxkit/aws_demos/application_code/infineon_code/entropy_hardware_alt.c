@@ -26,6 +26,9 @@
 
 #include "xmc_common.h"
 #include "mbedtls/entropy_poll.h"
+#include "FreeRTOS.h"
+//#include "portmacro.h"
+//#include "FreeRTOS_IP.h"
 
 #if !defined(CONFIG_USE_OPTIGA)
 int mbedtls_hardware_poll(void *data, unsigned char *output, size_t len, size_t *olen)
@@ -49,5 +52,15 @@ int mbedtls_hardware_poll(void *data, unsigned char *output, size_t len, size_t 
   *olen = len;
 
   return 0;
+}
+
+BaseType_t xApplicationGetRandomNumber( uint32_t * pulNumber ) {
+	char* data;
+	uint32_t len = 0;
+	mbedtls_hardware_poll(data, pulNumber, 32, &len);
+	if ( len == 0 ) {
+		return 0;
+	}
+	return 1;
 }
 #endif

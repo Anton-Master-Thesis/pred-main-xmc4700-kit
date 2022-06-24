@@ -37,6 +37,7 @@
 
 /* Set up logging for this demo. */
 #include "iot_demo_logging.h"
+#include "iot_demo_https_s3_upload_sync.h"
 
 /* FreeRTOS includes. */
 #include "iot_https_client.h"
@@ -236,13 +237,13 @@ int RunHttpsSyncUploadDemo( bool awsIotMqttMode,
     IotHttpsSyncInfo_t respSyncInfo = { 0 };
 
     /* The location of the path within string IOT_DEMO_HTTPS_PRESIGNED_PUT_URL. */
-    const char * pPath = NULL;
+    const char * pPath = "/serviceregistry/echo";
     /* The length of the path within string IOT_DEMO_HTTPS_PRESIGNED_PUT_URL. */
-    size_t pathLen = 0;
+    size_t pathLen = sizeof("/serviceregistry/echo");
     /* The location of the address within string IOT_DEMO_HTTPS_PRESIGNED_PUT_URL. */
-    const char * pAddress = NULL;
+    const char * pAddress = "192.168.105.208";
     /* The length of the address within string IOT_DEMO_HTTPS_PRESIGNED_PUT_URL. */
-    size_t addressLen = 0;
+    size_t addressLen = sizeof("192.168.105.208");
     /* The status of HTTP response. */
     uint16_t respStatus = IOT_HTTPS_STATUS_OK;
     /* The current attempt in the number of connection tries. */
@@ -252,10 +253,10 @@ int RunHttpsSyncUploadDemo( bool awsIotMqttMode,
 
     /* Retrieve the path location from IOT_DEMO_HTTPS_PRESIGNED_GET_URL. This function returns the length of the path
      * without the query into pathLen. */
-    httpsClientStatus = IotHttpsClient_GetUrlPath( IOT_DEMO_HTTPS_PRESIGNED_PUT_URL,
-                                                   strlen( IOT_DEMO_HTTPS_PRESIGNED_PUT_URL ),
-                                                   &pPath,
-                                                   &pathLen );
+    //httpsClientStatus = IotHttpsClient_GetUrlPath( IOT_DEMO_HTTPS_PRESIGNED_PUT_URL,
+    //                                               strlen( IOT_DEMO_HTTPS_PRESIGNED_PUT_URL ),
+    //                                               &pPath,
+    //                                               &pathLen );
 
     if( httpsClientStatus != IOT_HTTPS_OK )
     {
@@ -266,10 +267,10 @@ int RunHttpsSyncUploadDemo( bool awsIotMqttMode,
     }
 
     /* Retrieve the address location and length from the IOT_DEMO_HTTPS_PRESIGNED_PUT_URL. */
-    httpsClientStatus = IotHttpsClient_GetUrlAddress( IOT_DEMO_HTTPS_PRESIGNED_PUT_URL,
-                                                      strlen( IOT_DEMO_HTTPS_PRESIGNED_PUT_URL ),
-                                                      &pAddress,
-                                                      &addressLen );
+    //httpsClientStatus = IotHttpsClient_GetUrlAddress( IOT_DEMO_HTTPS_PRESIGNED_PUT_URL,
+    //                                                  strlen( IOT_DEMO_HTTPS_PRESIGNED_PUT_URL ),
+    //                                                  &pAddress,
+    //                                                  &addressLen );
 
     if( httpsClientStatus != IOT_HTTPS_OK )
     {
@@ -282,9 +283,13 @@ int RunHttpsSyncUploadDemo( bool awsIotMqttMode,
     /* Set the connection configurations. */
     connConfig.pAddress = pAddress;
     connConfig.addressLen = addressLen;
-    connConfig.port = IOT_DEMO_HTTPS_PORT;
-    connConfig.pCaCert = IOT_DEMO_HTTPS_TRUSTED_ROOT_CA;
-    connConfig.caCertLen = sizeof( IOT_DEMO_HTTPS_TRUSTED_ROOT_CA );
+    connConfig.port = 8443;
+    //connConfig.pCaCert = IOT_DEMO_HTTPS_TRUSTED_ROOT_CA;
+    //connConfig.caCertLen = sizeof( IOT_DEMO_HTTPS_TRUSTED_ROOT_CA );
+#include "ah_config.h"
+    connConfig.flags |= IOT_HTTPS_IS_NON_TLS_FLAG | IOT_HTTPS_DISABLE_SNI;
+	connConfig.pCaCert = AH_HTTPS_ROOT_CA;
+	connConfig.caCertLen = sizeof(AH_HTTPS_ROOT_CA);
     connConfig.userBuffer.pBuffer = _pConnUserBuffer;
     connConfig.userBuffer.bufferLen = sizeof( _pConnUserBuffer );
     connConfig.pClientCert = ( ( IotNetworkCredentials_t * ) pNetworkCredentialInfo )->pClientCert;
@@ -313,8 +318,8 @@ int RunHttpsSyncUploadDemo( bool awsIotMqttMode,
      * access specific header fields in the body of the message in a multipart/form-data encoded message. See
      * https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPOST.html for more information about POST object. See
      * https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUT.html for more information about PUT object. */
-    reqConfig.method = IOT_HTTPS_METHOD_PUT;
-    reqConfig.isNonPersistent = false;
+    reqConfig.method = IOT_HTTPS_METHOD_GET;
+    reqConfig.isNonPersistent = true;
     reqConfig.userBuffer.pBuffer = _pReqUserBuffer;
     reqConfig.userBuffer.bufferLen = sizeof( _pReqUserBuffer );
     reqConfig.isAsync = false;
